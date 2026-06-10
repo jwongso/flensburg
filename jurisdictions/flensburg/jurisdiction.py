@@ -7,11 +7,9 @@ All federal - uniform across all 16 Bundeslaender.
 from core.jurisdiction import (
     CorpusConfig,
     JurisdictionBase,
-    LegislationConfig,
     LegislationSource,
     RouteFixture,
     SmokeFixture,
-    WebVerifyConfig,
 )
 from core.routing import StatuteRoute
 from jurisdictions.flensburg.prompt import SYSTEM_PROMPT
@@ -85,19 +83,12 @@ class FlensburgJurisdiction(JurisdictionBase):
         return LOW_PRIORITY_SECTIONS
 
     @property
-    def legislation(self) -> LegislationConfig:
-        return LegislationConfig(
-            acts={},
-            cache_ttl_seconds=3600,
-        )
+    def legislation(self):
+        return None  # legislation pre-ingested into de_legal Qdrant collection
 
     @property
-    def web_verify(self) -> WebVerifyConfig:
-        return WebVerifyConfig(
-            search_prefix="deutsches Verkehrsrecht",
-            max_results=3,
-            cache_ttl_seconds=604800,
-        )
+    def web_verify(self):
+        return None  # not needed initially
 
     @property
     def leg_ce_min_score(self) -> float:

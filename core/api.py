@@ -405,7 +405,7 @@ def create_app(
                         alwaysonline=req.alwaysonline,
                     )
 
-                if not context_texts:
+                if not context_texts and not anchor_vstore:
                     yield f"data: {json.dumps({'type': 'error', 'message': 'I could not find enough relevant decisions to answer this question reliably.'})}\n\n"
                     return
 

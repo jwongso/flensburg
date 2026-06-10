@@ -20,7 +20,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/BKatV/anlage",   # fine table with all speed thresholds
             "DELEG/BKatV/4",        # Regelfahrverbot thresholds
         ],
-        case_synthetic_query="Geschwindigkeitsueberschreitung Bussgeld Punkte Fahrverbot",
+        synthetic_query="Geschwindigkeitsueberschreitung Bussgeld Punkte Fahrverbot",
     ),
 
     # --- Punkte / Flensburg ---
@@ -36,7 +36,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/StVG/29",        # Tilgung der Eintragungen
             "DELEG/StVG/4a",        # Fahreignungsseminar
         ],
-        case_synthetic_query="Punkte Fahreignungsregister Flensburg Abbau Tilgung Schwellenwert",
+        synthetic_query="Punkte Fahreignungsregister Flensburg Abbau Tilgung Schwellenwert",
     ),
 
     # --- Fahrverbot ---
@@ -52,7 +52,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/BKatV/4",        # Regelfahrverbot - Schwellenwerte
             "DELEG/BKatV/3",        # Bussgeldbegresaetze allgemein
         ],
-        case_synthetic_query="Fahrverbot Dauer Vollstreckung Aufschieben Beruf Haerte",
+        synthetic_query="Fahrverbot Dauer Vollstreckung Aufschieben Beruf Haerte",
     ),
 
     # --- MPU ---
@@ -70,7 +70,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/FeV/13a",        # Eignungszweifel bei Cannabis
             "DELEG/FeV/46",         # Entziehung, Beschraenkung, Auflagen
         ],
-        case_synthetic_query="MPU medizinisch-psychologische Untersuchung Fahrerlaubnis Wiedererteilung Alkohol",
+        synthetic_query="MPU medizinisch-psychologische Untersuchung Fahrerlaubnis Wiedererteilung Alkohol",
     ),
 
     # --- Fahrerlaubnis / Fuehrerschein ---
@@ -88,7 +88,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/FeV/6",          # Fahrerlaubnisklassen
             "DELEG/FeV/20",         # Neuerteilung nach Entzug
         ],
-        case_synthetic_query="Fahrerlaubnis Erteilung Entzug Wiedererteilung FeV Klassen Voraussetzungen",
+        synthetic_query="Fahrerlaubnis Erteilung Entzug Wiedererteilung FeV Klassen Voraussetzungen",
     ),
 
     # --- Einspruch gegen Bussgeld ---
@@ -106,7 +106,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/OWiG/69",        # Zwischenverfahren nach Einspruch
             "DELEG/OWiG/31",        # Verfolgungsverjaehrung
         ],
-        case_synthetic_query="Einspruch Bussgeldverfahren OWiG Frist Zustellung Zwischenverfahren",
+        synthetic_query="Einspruch Bussgeldverfahren OWiG Frist Zustellung Zwischenverfahren",
     ),
 
     # --- Alkohol / Drogen am Steuer ---
@@ -126,7 +126,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/FeV/13",         # Eignungszweifel Alkohol -> MPU
             "DELEG/FeV/13a",        # Eignungszweifel Cannabis -> MPU
         ],
-        case_synthetic_query="Alkohol Promille Strassenverkehr Ordnungswidrigkeit Straftat Fahrerlaubnisentzug",
+        synthetic_query="Alkohol Promille Strassenverkehr Ordnungswidrigkeit Straftat Fahrerlaubnisentzug",
     ),
 
     # --- Unfall / Haftpflicht ---
@@ -144,7 +144,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/StVG/7",         # Haftung des Halters
             "DELEG/PflVG/1",        # Versicherungspflicht
         ],
-        case_synthetic_query="Verkehrsunfall Haftung Wartepflicht Unfallflucht Versicherung Schadensersatz",
+        synthetic_query="Verkehrsunfall Haftung Wartepflicht Unfallflucht Versicherung Schadensersatz",
     ),
 
     # --- Parken / Halteverbote ---
@@ -161,7 +161,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/StVO/13",        # Einrichtungen zur Ueberwachung der Parkzeit
             "DELEG/StVO/15a",       # Abschleppen von Fahrzeugen
         ],
-        case_synthetic_query="Parken Halteverbot Parkverbot Bussgeld Abschleppen StVO",
+        synthetic_query="Parken Halteverbot Parkverbot Bussgeld Abschleppen StVO",
     ),
 
     # --- Handynutzung am Steuer ---
@@ -176,7 +176,7 @@ ROUTES: list[StatuteRoute] = [
             "DELEG/StVO/23",        # Sonstige Pflichten - Handyverbot in Abs. 1a
             "DELEG/BKatV/anlage",   # Bussgeldtabelle: Handynutzung lfd. Nr. 246
         ],
-        case_synthetic_query="Handynutzung Mobiltelefon Steuer Bussgeld Punkte StVO 23",
+        synthetic_query="Handynutzung Mobiltelefon Steuer Bussgeld Punkte StVO 23",
     ),
 ]
 
