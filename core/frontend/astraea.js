@@ -201,7 +201,7 @@
       if (!queueNoticeEl) return;
       const waiting = d.waiting || 0;
       if (waiting > 0) {
-        queueNoticeEl.textContent = `${waiting} ${waiting === 1 ? 'person' : 'people'} waiting - estimated wait ~${d.estimated_wait_seconds || 0}s`;
+        queueNoticeEl.textContent = _config.ui.queueStatus(waiting, d.estimated_wait_seconds || 0);
         queueNoticeEl.classList.add('visible');
       } else {
         queueNoticeEl.classList.remove('visible');
@@ -218,6 +218,40 @@
         body: JSON.stringify({ ...payload, rating, comment: comment || '', is_debug: isDebug || false }),
       });
     } catch (_) {}
+  }
+
+  // ---- Per-jurisdiction config (override via Astraea.configure before init calls) ----
+  const _config = {
+    ui: {
+      cheatBtnTitle:      'Cheat codes',
+      cheatTitle:         'Cheat codes',
+      cheatHint:          'Click to insert into your question. Hover to see an example.',
+      cheatEgPrefix:      'e.g.',
+      contextBtnTitle:    'Your context',
+      contextTitle:       'Your context',
+      contextHint:        'Tell the AI about your situation once. Stored in your browser only - sent with each question.',
+      contextPlaceholder: 'e.g. What is my situation?',
+      contextClear:       'Clear',
+      contextSave:        'Save',
+      queueStatus:        (n, eta) => `${n} ${n === 1 ? 'person' : 'people'} waiting - estimated wait ~${eta}s`,
+    },
+    cheatCodes: [
+      { cmd: '/search',    desc: 'Find cases without generating an answer',         eg: '/search hardship fixed term house purchase foreseeable' },
+      { cmd: '/case',      desc: 'Focus on Tribunal decisions and outcomes',        eg: '/case Bond deductions for fair wear and tear' },
+      { cmd: '/checklist', desc: 'Step-by-step action list',                        eg: '/checklist My landlord won\'t fix the mould' },
+      { cmd: '/landlord',  desc: 'Answer from the landlord\'s perspective',         eg: '/landlord My tenant hasn\'t paid rent in 3 weeks' },
+      { cmd: '/pitfalls',  desc: 'Common mistakes and risks to avoid',              eg: '/pitfalls I want to end my fixed-term tenancy early' },
+    ],
+  };
+
+  function configure(overrides) {
+    if (!overrides) return;
+    if (overrides.ui) {
+      const { queueStatus, ...rest } = overrides.ui;
+      Object.assign(_config.ui, rest);
+      if (queueStatus) _config.ui.queueStatus = queueStatus;
+    }
+    if (overrides.cheatCodes) _config.cheatCodes = overrides.cheatCodes;
   }
 
   // ---- Cheat codes (bottom-left floating button + panel) ----
@@ -242,14 +276,6 @@
 .astraea-cheat-item:hover .astraea-cheat-eg{display:block;}
 `;
 
-  const _CHEAT_CODES = [
-    { cmd: '/search',    desc: 'Gesetze durchsuchen ohne Antwort zu generieren',   eg: '/search Tempolimit Autobahn Ausnahmen Fahrverbot' },
-    { cmd: '/case',      desc: 'Auf BGH/OLG-Entscheidungen konzentrieren',         eg: '/case OLG Einspruch Radarkontrolle Messfehler' },
-    { cmd: '/checklist', desc: 'Schritt-fuer-Schritt Handlungsliste',              eg: '/checklist Bussgeldbescheid erhalten - was tun?' },
-    { cmd: '/einspruch', desc: 'Formulierungshilfe fuer einen Einspruch',          eg: '/einspruch Bussgeldbescheid 25 km/h zu schnell innerorts' },
-    { cmd: '/pitfalls',  desc: 'Typische Fehler und Risiken vermeiden',            eg: '/pitfalls Ich moechte Einspruch gegen meinen Bussgeldbescheid einlegen' },
-  ];
-
   function initCheatCodes(inputSelector) {
     if (!document.getElementById('astraea-cheat-styles')) {
       const s = document.createElement('style');
@@ -258,27 +284,29 @@
       document.head.appendChild(s);
     }
 
+    const ui = _config.ui;
+
     const btn = document.createElement('button');
     btn.className = 'astraea-cheat-btn';
-    btn.title = 'Slash-Befehle';
+    btn.title = ui.cheatBtnTitle;
     btn.setAttribute('aria-label', 'Show cheat codes');
     btn.innerHTML = '<span style="font-size:1.2rem;line-height:1">&#9889;</span>';
 
-    const itemsHtml = _CHEAT_CODES.map(c =>
+    const itemsHtml = _config.cheatCodes.map(c =>
       `<li class="astraea-cheat-item" data-cmd="${escapeHtml(c.cmd)}">
         <div class="astraea-cheat-row">
           <span class="astraea-cheat-cmd">${escapeHtml(c.cmd)}</span>
           <span class="astraea-cheat-desc">${escapeHtml(c.desc)}</span>
         </div>
-        <div class="astraea-cheat-eg">z.B. ${escapeHtml(c.eg)}</div>
+        <div class="astraea-cheat-eg">${escapeHtml(ui.cheatEgPrefix)} ${escapeHtml(c.eg)}</div>
       </li>`
     ).join('');
 
     const panel = document.createElement('div');
     panel.className = 'astraea-cheat-panel hidden';
     panel.innerHTML =
-      '<div class="astraea-cheat-hdr"><h3>&#9889; Slash-Befehle</h3><button class="astraea-cheat-x" aria-label="Close">&times;</button></div>'
-      + '<p class="astraea-cheat-hint">Klicken zum Einfuegen. Hover fuer ein Beispiel.</p>'
+      `<div class="astraea-cheat-hdr"><h3>&#9889; ${escapeHtml(ui.cheatTitle)}</h3><button class="astraea-cheat-x" aria-label="Close">&times;</button></div>`
+      + `<p class="astraea-cheat-hint">${escapeHtml(ui.cheatHint)}</p>`
       + `<ul class="astraea-cheat-list">${itemsHtml}</ul>`;
 
     document.body.appendChild(btn);
@@ -340,19 +368,21 @@
       document.head.appendChild(s);
     }
 
+    const ui = _config.ui;
+
     const btn = document.createElement('button');
     btn.className = 'astraea-ctx-btn';
-    btn.title = 'Mein Kontext';
+    btn.title = ui.contextBtnTitle;
     btn.setAttribute('aria-label', 'Set your personal context');
     btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
 
     const panel = document.createElement('div');
     panel.className = 'astraea-ctx-panel hidden';
-    panel.innerHTML = '<div class="astraea-ctx-hdr"><h3>Mein Kontext</h3><button class="astraea-ctx-x" aria-label="Close">&times;</button></div>'
-      + '<p class="astraea-ctx-hint">Beschreiben Sie Ihre Situation einmalig. Nur im Browser gespeichert - wird mit jeder Frage mitgesendet.</p>'
-      + '<textarea id="astraea-ctx-ta" rows="4" maxlength="500" placeholder="z.B. Ich habe einen Fuehrerschein Klasse B seit 2018. Ich wohne in Bayern. Ich habe 3 Punkte in Flensburg."></textarea>'
+    panel.innerHTML = `<div class="astraea-ctx-hdr"><h3>${escapeHtml(ui.contextTitle)}</h3><button class="astraea-ctx-x" aria-label="Close">&times;</button></div>`
+      + `<p class="astraea-ctx-hint">${escapeHtml(ui.contextHint)}</p>`
+      + `<textarea id="astraea-ctx-ta" rows="4" maxlength="500" placeholder="${escapeHtml(ui.contextPlaceholder)}"></textarea>`
       + '<div class="astraea-ctx-char"><span id="astraea-ctx-n">0</span>/500</div>'
-      + '<div class="astraea-ctx-actions"><button class="astraea-ctx-clear">Loeschen</button><button class="astraea-ctx-save">Speichern</button></div>';
+      + `<div class="astraea-ctx-actions"><button class="astraea-ctx-clear">${escapeHtml(ui.contextClear)}</button><button class="astraea-ctx-save">${escapeHtml(ui.contextSave)}</button></div>`;
 
     document.body.appendChild(btn);
     document.body.appendChild(panel);
@@ -409,6 +439,7 @@
   }
 
   global.Astraea = {
+    configure,
     escapeHtml,
     renderAnswer,
     renderSources,

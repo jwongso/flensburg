@@ -1,5 +1,28 @@
 'use strict';
 
+Astraea.configure({
+  ui: {
+    cheatBtnTitle:      'Slash-Befehle',
+    cheatTitle:         'Slash-Befehle',
+    cheatHint:          'Klicken zum Einfuegen. Hover fuer ein Beispiel.',
+    cheatEgPrefix:      'z.B.',
+    contextBtnTitle:    'Mein Kontext',
+    contextTitle:       'Mein Kontext',
+    contextHint:        'Beschreiben Sie Ihre Situation einmalig. Nur im Browser gespeichert - wird mit jeder Frage mitgesendet.',
+    contextPlaceholder: 'z.B. Ich habe einen Fuehrerschein Klasse B seit 2018. Ich wohne in Bayern. Ich habe 3 Punkte in Flensburg.',
+    contextClear:       'Loeschen',
+    contextSave:        'Speichern',
+    queueStatus:        (n, eta) => `${n} ${n === 1 ? 'Person' : 'Personen'} in der Warteschlange - geschaetzte Wartezeit ~${eta}s`,
+  },
+  cheatCodes: [
+    { cmd: '/search',    desc: 'Gesetze durchsuchen ohne Antwort zu generieren',   eg: '/search Tempolimit Autobahn Ausnahmen Fahrverbot' },
+    { cmd: '/case',      desc: 'Auf BGH/OLG-Entscheidungen konzentrieren',         eg: '/case OLG Einspruch Radarkontrolle Messfehler' },
+    { cmd: '/checklist', desc: 'Schritt-fuer-Schritt Handlungsliste',              eg: '/checklist Bussgeldbescheid erhalten - was tun?' },
+    { cmd: '/einspruch', desc: 'Formulierungshilfe fuer einen Einspruch',          eg: '/einspruch Bussgeldbescheid 25 km/h zu schnell innerorts' },
+    { cmd: '/pitfalls',  desc: 'Typische Fehler und Risiken vermeiden',            eg: '/pitfalls Ich moechte Einspruch gegen meinen Bussgeldbescheid einlegen' },
+  ],
+});
+
 // ---- Anonymous session (localStorage UUID, 7-day sliding window) ----
 function _getSessionId() {
   const key = 'flensburg_session_id';
@@ -992,7 +1015,7 @@ form.addEventListener('submit', async (e) => {
       msg = (data.detail && data.detail.error) || data.detail || msg;
     } catch (_) {}
     if (res.status === 429) {
-      showError('You already have a query in progress. Please wait for it to finish.');
+      showError('Eine Anfrage ist bereits in Bearbeitung. Bitte warten Sie, bis sie abgeschlossen ist.');
     } else if (res.status === 503) {
       showError('The server is busy right now. Please try again in a moment.');
     } else {
@@ -1027,7 +1050,7 @@ form.addEventListener('submit', async (e) => {
         _artifact.debug_timing = { generate_ms: event.generate_ms, total_ms: event.total_ms };
         if (_debugInfo) _renderDebugPanel(_debugInfo, event);
       } else if (event.type === 'queue') {
-        loadingText.textContent = `Position ${event.position} in queue - estimated wait ~${event.estimated_wait_s}s`;
+        loadingText.textContent = `Position ${event.position} in der Warteschlange - geschaetzte Wartezeit ~${event.estimated_wait_s}s`;
       } else if (event.type === 'context_debug') {
         _artifact.context_debug = event;
         if (_debugMode) _renderContextDebugPanel(event, resultCard);
@@ -1082,6 +1105,6 @@ Astraea.loadToken().then(t => { _apiToken = t; });
 _initDebugShortcut();
 pollQueue();
 setInterval(pollQueue, 15000);
-Astraea.initDisclaimer('nzth_agreed_v1');
-Astraea.initUserContext('nzth_user_ctx');
+Astraea.initDisclaimer('flensburg_agreed_v1');
+Astraea.initUserContext('flensburg_user_ctx');
 Astraea.initCheatCodes('#question');
