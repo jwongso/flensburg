@@ -4,22 +4,22 @@ Astraea.configure({
   ui: {
     cheatBtnTitle:      'Slash-Befehle',
     cheatTitle:         'Slash-Befehle',
-    cheatHint:          'Klicken zum Einfuegen. Hover fuer ein Beispiel.',
+    cheatHint:          'Klicken zum Einfügen. Hover für ein Beispiel.',
     cheatEgPrefix:      'z.B.',
     contextBtnTitle:    'Mein Kontext',
     contextTitle:       'Mein Kontext',
     contextHint:        'Beschreiben Sie Ihre Situation einmalig. Nur im Browser gespeichert - wird mit jeder Frage mitgesendet.',
-    contextPlaceholder: 'z.B. Ich habe einen Fuehrerschein Klasse B seit 2018. Ich wohne in Bayern. Ich habe 3 Punkte in Flensburg.',
-    contextClear:       'Loeschen',
+    contextPlaceholder: 'z.B. Ich habe einen Führerschein Klasse B seit 2018. Ich wohne in Bayern. Ich habe 3 Punkte in Flensburg.',
+    contextClear:       'Löschen',
     contextSave:        'Speichern',
-    queueStatus:        (n, eta) => `${n} ${n === 1 ? 'Person' : 'Personen'} in der Warteschlange - geschaetzte Wartezeit ~${eta}s`,
+    queueStatus:        (n, eta) => `${n} ${n === 1 ? 'Person' : 'Personen'} in der Warteschlange - geschätzte Wartezeit ~${eta}s`,
   },
   cheatCodes: [
     { cmd: '/search',    desc: 'Gesetze durchsuchen ohne Antwort zu generieren',   eg: '/search Tempolimit Autobahn Ausnahmen Fahrverbot' },
     { cmd: '/case',      desc: 'Auf BGH/OLG-Entscheidungen konzentrieren',         eg: '/case OLG Einspruch Radarkontrolle Messfehler' },
-    { cmd: '/checklist', desc: 'Schritt-fuer-Schritt Handlungsliste',              eg: '/checklist Bussgeldbescheid erhalten - was tun?' },
-    { cmd: '/einspruch', desc: 'Formulierungshilfe fuer einen Einspruch',          eg: '/einspruch Bussgeldbescheid 25 km/h zu schnell innerorts' },
-    { cmd: '/pitfalls',  desc: 'Typische Fehler und Risiken vermeiden',            eg: '/pitfalls Ich moechte Einspruch gegen meinen Bussgeldbescheid einlegen' },
+    { cmd: '/checklist', desc: 'Schritt-für-Schritt Handlungsliste',               eg: '/checklist Bußgeldbescheid erhalten - was tun?' },
+    { cmd: '/einspruch', desc: 'Formulierungshilfe für einen Einspruch',           eg: '/einspruch Bußgeldbescheid 25 km/h zu schnell innerorts' },
+    { cmd: '/pitfalls',  desc: 'Typische Fehler und Risiken vermeiden',            eg: '/pitfalls Ich möchte Einspruch gegen meinen Bußgeldbescheid einlegen' },
   ],
 });
 
@@ -1050,7 +1050,7 @@ form.addEventListener('submit', async (e) => {
         _artifact.debug_timing = { generate_ms: event.generate_ms, total_ms: event.total_ms };
         if (_debugInfo) _renderDebugPanel(_debugInfo, event);
       } else if (event.type === 'queue') {
-        loadingText.textContent = `Position ${event.position} in der Warteschlange - geschaetzte Wartezeit ~${event.estimated_wait_s}s`;
+        loadingText.textContent = `Position ${event.position} in der Warteschlange - geschätzte Wartezeit ~${event.estimated_wait_s}s`;
       } else if (event.type === 'context_debug') {
         _artifact.context_debug = event;
         if (_debugMode) _renderContextDebugPanel(event, resultCard);
