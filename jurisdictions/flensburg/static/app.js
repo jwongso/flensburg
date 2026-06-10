@@ -15,11 +15,11 @@ Astraea.configure({
     queueStatus:        (n, eta) => `${n} ${n === 1 ? 'Person' : 'Personen'} in der Warteschlange - geschätzte Wartezeit ~${eta}s`,
   },
   cheatCodes: [
-    { cmd: '/search',    desc: 'Gesetze durchsuchen ohne Antwort zu generieren',   eg: '/search Tempolimit Autobahn Ausnahmen Fahrverbot' },
-    { cmd: '/case',      desc: 'Auf BGH/OLG-Entscheidungen konzentrieren',         eg: '/case OLG Einspruch Radarkontrolle Messfehler' },
-    { cmd: '/checklist', desc: 'Schritt-für-Schritt Handlungsliste',               eg: '/checklist Bußgeldbescheid erhalten - was tun?' },
-    { cmd: '/einspruch', desc: 'Formulierungshilfe für einen Einspruch',           eg: '/einspruch Bußgeldbescheid 25 km/h zu schnell innerorts' },
-    { cmd: '/pitfalls',  desc: 'Typische Fehler und Risiken vermeiden',            eg: '/pitfalls Ich möchte Einspruch gegen meinen Bußgeldbescheid einlegen' },
+    { cmd: '/einfach',   desc: 'Antwort in einfacher Sprache - kein Behörden- oder Fachjargon',  eg: '/einfach Ich wurde geblitzt. Was muss ich jetzt tun?' },
+    { cmd: '/paragraph', desc: 'Gesetzestext eines bestimmten Paragraphen erklären',              eg: '/paragraph StVO 3' },
+    { cmd: '/checklist', desc: 'Schritt-für-Schritt Handlungsliste',                              eg: '/checklist Bußgeldbescheid erhalten - was tun?' },
+    { cmd: '/einspruch', desc: 'Formulierungshilfe für einen Einspruch',                          eg: '/einspruch Bußgeldbescheid 25 km/h zu schnell innerorts' },
+    { cmd: '/pitfalls',  desc: 'Typische Fehler und Risiken vermeiden',                           eg: '/pitfalls Ich möchte Einspruch gegen meinen Bußgeldbescheid einlegen' },
   ],
 });
 
