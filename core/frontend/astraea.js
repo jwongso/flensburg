@@ -260,7 +260,7 @@
 
     const btn = document.createElement('button');
     btn.className = 'astraea-cheat-btn';
-    btn.title = 'Cheat codes';
+    btn.title = 'Slash-Befehle';
     btn.setAttribute('aria-label', 'Show cheat codes');
     btn.innerHTML = '<span style="font-size:1.2rem;line-height:1">&#9889;</span>';
 
@@ -270,15 +270,15 @@
           <span class="astraea-cheat-cmd">${escapeHtml(c.cmd)}</span>
           <span class="astraea-cheat-desc">${escapeHtml(c.desc)}</span>
         </div>
-        <div class="astraea-cheat-eg">e.g. ${escapeHtml(c.eg)}</div>
+        <div class="astraea-cheat-eg">z.B. ${escapeHtml(c.eg)}</div>
       </li>`
     ).join('');
 
     const panel = document.createElement('div');
     panel.className = 'astraea-cheat-panel hidden';
     panel.innerHTML =
-      '<div class="astraea-cheat-hdr"><h3>&#9889; Cheat codes</h3><button class="astraea-cheat-x" aria-label="Close">&times;</button></div>'
-      + '<p class="astraea-cheat-hint">Click to insert into your question. Hover to see an example.</p>'
+      '<div class="astraea-cheat-hdr"><h3>&#9889; Slash-Befehle</h3><button class="astraea-cheat-x" aria-label="Close">&times;</button></div>'
+      + '<p class="astraea-cheat-hint">Klicken zum Einfuegen. Hover fuer ein Beispiel.</p>'
       + `<ul class="astraea-cheat-list">${itemsHtml}</ul>`;
 
     document.body.appendChild(btn);
@@ -342,17 +342,17 @@
 
     const btn = document.createElement('button');
     btn.className = 'astraea-ctx-btn';
-    btn.title = 'Your context';
+    btn.title = 'Mein Kontext';
     btn.setAttribute('aria-label', 'Set your personal context');
     btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
 
     const panel = document.createElement('div');
     panel.className = 'astraea-ctx-panel hidden';
-    panel.innerHTML = '<div class="astraea-ctx-hdr"><h3>Your context</h3><button class="astraea-ctx-x" aria-label="Close">&times;</button></div>'
-      + '<p class="astraea-ctx-hint">Tell the AI about your situation once. Stored in your browser only - sent with each question.</p>'
+    panel.innerHTML = '<div class="astraea-ctx-hdr"><h3>Mein Kontext</h3><button class="astraea-ctx-x" aria-label="Close">&times;</button></div>'
+      + '<p class="astraea-ctx-hint">Beschreiben Sie Ihre Situation einmalig. Nur im Browser gespeichert - wird mit jeder Frage mitgesendet.</p>'
       + '<textarea id="astraea-ctx-ta" rows="4" maxlength="500" placeholder="z.B. Ich habe einen Fuehrerschein Klasse B seit 2018. Ich wohne in Bayern. Ich habe 3 Punkte in Flensburg."></textarea>'
       + '<div class="astraea-ctx-char"><span id="astraea-ctx-n">0</span>/500</div>'
-      + '<div class="astraea-ctx-actions"><button class="astraea-ctx-clear">Clear</button><button class="astraea-ctx-save">Save</button></div>';
+      + '<div class="astraea-ctx-actions"><button class="astraea-ctx-clear">Loeschen</button><button class="astraea-ctx-save">Speichern</button></div>';
 
     document.body.appendChild(btn);
     document.body.appendChild(panel);
