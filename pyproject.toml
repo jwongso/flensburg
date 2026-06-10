@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flensburg"
+version = "0.1.0"
+description = "German traffic law Q&A - Bussgeld, Fahrerlaubnis, MPU, Flensburg points"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ email = "jsaputra@riseup.net" }]
+keywords = ["legal", "rag", "llm", "verkehrsrecht", "fahrerlaubnis", "bussgeld"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.29",
+    "qdrant-client>=1.9",
+    "sentence-transformers>=3.0",
+    "pydantic>=2.7",
+    "httpx>=0.27",
+    "redis>=5.0",
+    "cachetools>=5.3",
+]
+
+[project.urls]
+Homepage = "https://github.com/jwongso/flensburg"
+Issues = "https://github.com/jwongso/flensburg/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+]
+ingest = [
+    "beautifulsoup4>=4.12",
+    "pypdf>=4.0",
+    "pytesseract>=0.3",
+    "pillow>=10.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["core*", "jurisdictions*", "ingest*", "examples*"]
+
+[tool.setuptools.package-data]
+core = ["frontend/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["."]
+markers = [
+    "routing: Tier 0 - pure keyword routing, no Qdrant or LLM required",
+    "retrieval: Tier 1 - Qdrant only, no LLM required",
+    "structural: Tier 2 - LLM required, non-semantic checks",
+    "llm: Tier 3 - LLM required, semantic answer quality",
+]

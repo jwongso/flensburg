@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Astraea Qdrant Payload Schema",
+  "description": "Required payload structure for all jurisdiction collections. Scrapers must produce chunks conforming to this schema.",
+  "type": "object",
+  "required": ["document_id", "court", "court_name", "title", "date", "url", "text", "source_type"],
+  "properties": {
+    "document_id": {
+      "type": "string",
+      "description": "Unique stable identifier for this chunk. e.g. 'NZTT/2024/AKL/12345/chunk-3'"
+    },
+    "court": {
+      "type": "string",
+      "description": "Machine-readable court code used for Qdrant payload filtering. e.g. 'NZTT', 'NSWCAT', 'NZLEG'"
+    },
+    "court_name": {
+      "type": "string",
+      "description": "Human-readable court name shown in the UI. e.g. 'Tenancy Tribunal', 'NCAT'"
+    },
+    "title": {
+      "type": "string",
+      "description": "Case or document title. e.g. 'Smith v Jones [2024] NZTT Auckland 1234'"
+    },
+    "date": {
+      "type": "string",
+      "description": "Decision date in ISO 8601 format. e.g. '2024-03-15'"
+    },
+    "url": {
+      "type": "string",
+      "description": "Canonical public URL for the source document."
+    },
+    "text": {
+      "type": "string",
+      "description": "Chunk text content (120-word windows recommended)."
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["case", "legislation", "regulation", "guidance"],
+      "description": "Source type used for authority ranking."
+    },
+    "citation": {
+      "type": "string",
+      "description": "Neutral citation string if available. e.g. '[2024] NZTT Auckland 1234'"
+    },
+    "chunk_index": {
+      "type": "integer",
+      "description": "Zero-based index of this chunk within the source document."
+    }
+  },
+  "additionalProperties": true
+}

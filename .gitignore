@@ -1,0 +1,40 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Runtime data
+data/
+logs/
+feedback/
+*.log
+*.jsonl
+
+# Models (large files, download separately)
+*.gguf
+*.bin
+*.safetensors
+models/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Training data pipeline - local only, never commit
+.training/
