@@ -55,6 +55,20 @@ LAWS: dict[str, dict] = {
         "base_url": "https://www.gesetze-im-internet.de/bkatv_2013/",
         "date": "2013-03-14",
     },
+    # Selected StGB sections covering criminal traffic offenses only.
+    # Full StGB has 358 sections - we fetch only the four traffic-relevant ones.
+    "StGB_Verkehr": {
+        "act_id": "StGB",
+        "court_name": "Strafgesetzbuch (Verkehrsdelikte)",
+        "base_url": "https://www.gesetze-im-internet.de/stgb/",
+        "date": "1871-05-15",
+        "sections_only": ["__142.html", "__315b.html", "__315c.html", "__316.html"],
+    },
+    "PflVG": {
+        "court_name": "Pflichtversicherungsgesetz",
+        "base_url": "https://www.gesetze-im-internet.de/pflvg/",
+        "date": "1965-04-05",
+    },
 }
 
 _NS = uuid.UUID("b2c3d4e5-f6a7-8901-bcde-f12345678901")
@@ -104,7 +118,7 @@ def _section_links(html: str, base_url: str) -> list[tuple[str, str]]:
     return links
 
 
-def _parse_section(html: str, url: str, act_id: str, law: dict) -> list[dict] | None:
+def _parse_section(html: str, url: str, act_id: str, law: dict, canonical_act_id: str | None = None) -> list[dict] | None:
     """Parse a single section page. Returns list of chunk dicts or None if no content."""
     soup = BeautifulSoup(html, "html.parser")
 
@@ -126,7 +140,8 @@ def _parse_section(html: str, url: str, act_id: str, law: dict) -> list[dict] | 
         section_num = raw_num.lstrip("_")
     else:
         section_num = raw_num  # anlage, anhang_1, etc.
-    case_id = f"DELEG/{act_id}/{section_num}"
+    cid_act = canonical_act_id or act_id
+    case_id = f"DELEG/{cid_act}/{section_num}"
 
     # Extract body text - try multiple selector strategies
     content_div = (
@@ -152,7 +167,7 @@ def _parse_section(html: str, url: str, act_id: str, law: dict) -> list[dict] | 
     if len(text) < 30:
         return None
 
-    title = heading_text or f"{act_id} {section_num}"
+    title = heading_text or f"{canonical_act_id or act_id} {section_num}"
 
     # Chunk into ~150-word windows (law sections are often dense; slightly bigger windows)
     words = text.split()
@@ -259,14 +274,21 @@ def run(laws: list[str], collection: str, qdrant_url: str, dry_run: bool) -> Non
             print(f"\n=== {act_id} - {law['court_name']} ===")
             print(f"  Fetching index: {law['base_url']}")
 
-            try:
-                index_html = _get(http, law["base_url"])
-            except Exception as e:
-                print(f"  ERROR fetching index: {e}")
-                continue
-
-            section_links = _section_links(index_html, law["base_url"])
-            print(f"  Found {len(section_links)} section link(s)")
+            if "sections_only" in law:
+                # Fetch specific sections directly - skip index crawl
+                section_links = [
+                    (law["base_url"].rstrip("/") + "/" + s, s)
+                    for s in law["sections_only"]
+                ]
+                print(f"  Fetching {len(section_links)} specific section(s)")
+            else:
+                try:
+                    index_html = _get(http, law["base_url"])
+                except Exception as e:
+                    print(f"  ERROR fetching index: {e}")
+                    continue
+                section_links = _section_links(index_html, law["base_url"])
+                print(f"  Found {len(section_links)} section link(s)")
 
             if not section_links:
                 print("  WARNING: no section links found - check HTML structure")
@@ -281,7 +303,7 @@ def run(laws: list[str], collection: str, qdrant_url: str, dry_run: bool) -> Non
                     print(f"  ERROR {url}: {e}")
                     continue
 
-                chunks = _parse_section(page_html, url, act_id, law)
+                chunks = _parse_section(page_html, url, act_id, law, law.get("act_id"))
                 if not chunks:
                     print(f"  SKIP {url} (no parseable content)")
                     continue
