@@ -85,13 +85,13 @@ HEADERS = {
 # Fetch helpers
 # ---------------------------------------------------------------------------
 
-def _get(client: httpx.Client, url: str) -> str:
+def _get(client: httpx.Client, url: str) -> bytes:
     resp = client.get(url, headers=HEADERS, follow_redirects=True, timeout=30)
     resp.raise_for_status()
-    return resp.text
+    return resp.content  # return raw bytes - BS4 reads <meta charset> for correct encoding
 
 
-def _section_links(html: str, base_url: str) -> list[tuple[str, str]]:
+def _section_links(html: bytes, base_url: str) -> list[tuple[str, str]]:
     """Parse the law index page and return [(href, label), ...] for each section."""
     soup = BeautifulSoup(html, "html.parser")
     links = []
@@ -118,7 +118,7 @@ def _section_links(html: str, base_url: str) -> list[tuple[str, str]]:
     return links
 
 
-def _parse_section(html: str, url: str, act_id: str, law: dict, canonical_act_id: str | None = None) -> list[dict] | None:
+def _parse_section(html: bytes, url: str, act_id: str, law: dict, canonical_act_id: str | None = None) -> list[dict] | None:
     """Parse a single section page. Returns list of chunk dicts or None if no content."""
     soup = BeautifulSoup(html, "html.parser")
 
