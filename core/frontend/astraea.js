@@ -26,7 +26,11 @@
       const h = lines[0].match(/^(#{1,4}) (.+)/);
       if (h) {
         const level = Math.min(h[1].length + 2, 6);
-        return `<h${level}>${h[2]}</h${level}>`;
+        const headingHtml = `<h${level}>${h[2]}</h${level}>`;
+        const rest = lines.slice(1).filter(l => l.trim());
+        if (!rest.length) return headingHtml;
+        // content follows the heading in the same block - render it below
+        return headingHtml + `<p>${rest.map(l => l.replace(/  $/, '')).join('<br>')}</p>`;
       }
 
       if (lines.some(l => /^[-*] /.test(l.trim()))) {
