@@ -149,12 +149,10 @@ function _renderWebPanel(webEvent, container) {
 }
 
 // Terms shown in anchor forbidden-term checklist (must match backend _FORBIDDEN_ANCHOR_TERMS).
-const _FORBIDDEN_ANCHOR_TERMS_DISPLAY = [
-  'Schedule 1A', 'infringement fee', '42A(7)', '19(2)', 'penalty notice',
-];
+const _FORBIDDEN_ANCHOR_TERMS_DISPLAY = [];
 
 function _buildAnchorCard(s, anchorMethod) {
-  const num = (s.document_id || '').replace('NZLEG/RTA/', '');
+  const num = (s.document_id || '').replace('DELEG/', '');
   const forbidden = s.forbidden_terms || {};
   const checks = _FORBIDDEN_ANCHOR_TERMS_DISPLAY.map(t => {
     const found = forbidden[t];
@@ -246,7 +244,7 @@ function _renderContextDebugPanel(ev, container) {
     qHtml += `<div class="ctx-query-row"><span class="ctx-label">Rewrite</span><span class="ctx-meta-val">${ev.rewrite_used ? 'yes' : 'no'}</span></div>`;
   }
   if (pl.property_change_triggered) {
-    const sections = (pl.forced_sections || []).map(s => s.replace('NZLEG/RTA/', '')).join(', ');
+    const sections = (pl.forced_sections || []).map(s => s.replace('DELEG/', '')).join(', ');
     qHtml += `<div class="ctx-query-row"><span class="ctx-label">Prop-change gate</span><span class="ctx-meta-val ctx-gate-yes">triggered | terms: ${Astraea.escapeHtml((pl.trigger_terms || []).join(', '))} | forced: ${Astraea.escapeHtml(sections)}</span></div>`;
     const gate = pl.gate || {};
     const fallbackNote = gate.fallback_used ? ' | FALLBACK: all filtered, using original' : '';
@@ -256,11 +254,11 @@ function _renderContextDebugPanel(ev, container) {
   const sr = ev.statute_routing || {};
   if (sr.triggered) {
     const routes = (sr.matched_routes || []).join(', ');
-    const injected = (sr.forced_sections || []).map(s => s.replace('NZLEG/RTA/', '')).join(', ') || 'none';
+    const injected = (sr.forced_sections || []).map(s => s.replace('DELEG/', '')).join(', ') || 'none';
     const terms = (sr.trigger_terms || []).join(', ');
     qHtml += `<div class="ctx-query-row"><span class="ctx-label">Statute routing</span><span class="ctx-meta-val ctx-gate-yes">routes: ${Astraea.escapeHtml(routes)} | terms: ${Astraea.escapeHtml(terms)} | injected: ${Astraea.escapeHtml(injected)}</span></div>`;
     if (sr.suppressed_sections && sr.suppressed_sections.length) {
-      const sup = sr.suppressed_sections.map(s => s.section.replace('NZLEG/RTA/', '')).join(', ');
+      const sup = sr.suppressed_sections.map(s => s.section.replace('DELEG/', '')).join(', ');
       qHtml += `<div class="ctx-query-row"><span class="ctx-label">Suppressed</span><span class="ctx-meta-val">${Astraea.escapeHtml(sup)}</span></div>`;
     }
   } else if (ev.statute_routing !== undefined) {
@@ -275,7 +273,7 @@ function _renderContextDebugPanel(ev, container) {
   if (anchor.sections && anchor.sections.length) {
     const lbl = document.createElement('div');
     lbl.className = 'ctx-section-label';
-    lbl.textContent = `RTA anchor - ${anchor.method || 'unknown'} (legislation, not [SN] cited)`;
+    lbl.textContent = `Gesetzes-Anker - ${anchor.method || 'unknown'} (legislation, not [SN] cited)`;
     body.appendChild(lbl);
     anchor.sections.forEach(s => body.appendChild(_buildAnchorCard(s, anchor.method)));
   }
@@ -313,7 +311,7 @@ function _renderSharedContextDebugPanel(ev, container) {
   qHtml += `<div class="ctx-query-row"><span class="ctx-label">Original query</span><span class="ctx-query-text">${Astraea.escapeHtml(ev.original_query || '')}</span></div>`;
   qHtml += `<div class="ctx-query-row"><span class="ctx-label">Rewrite</span><span class="ctx-meta-val">disabled in compare mode - all strategies use the raw query</span></div>`;
   if (pl.property_change_triggered) {
-    const sections = (pl.forced_sections || []).map(s => s.replace('NZLEG/RTA/', '')).join(', ');
+    const sections = (pl.forced_sections || []).map(s => s.replace('DELEG/', '')).join(', ');
     qHtml += `<div class="ctx-query-row"><span class="ctx-label">Prop-change gate</span><span class="ctx-meta-val ctx-gate-yes">triggered | terms: ${Astraea.escapeHtml((pl.trigger_terms || []).join(', '))} | forced: ${Astraea.escapeHtml(sections)}</span></div>`;
   }
   qHtml += '</div>';
@@ -325,7 +323,7 @@ function _renderSharedContextDebugPanel(ev, container) {
   if (anchor.sections && anchor.sections.length) {
     const lbl = document.createElement('div');
     lbl.className = 'ctx-section-label';
-    lbl.textContent = `RTA anchor - ${anchor.method || 'unknown'} (shared, not [SN] cited)`;
+    lbl.textContent = `Gesetzes-Anker - ${anchor.method || 'unknown'} (shared, not [SN] cited)`;
     body.appendChild(lbl);
     anchor.sections.forEach(s => body.appendChild(_buildAnchorCard(s, anchor.method)));
   }
@@ -397,7 +395,7 @@ async function pollQueue() {
   await Astraea.pollQueue(queueNotice);
 }
 
-// ---- Source rendering (tenancy-specific labels + legislation toggle) ----
+// ---- Source rendering ----
 function renderSources(sources, legislation) {
   Astraea.renderSources(sources, legislation, {
     legislationGroupLabel: 'Relevante Gesetze',
@@ -785,7 +783,7 @@ function _colSetSources(strategy, sources, legislation) {
   if (hasDec) {
     if (hasLeg) html += '<div class="compare-sources-group">Decisions</div>';
     html += sources.map((s, i) => {
-      const label = s.date ? `${s.court_name || 'Tribunal'} - ${s.date}` : (s.court_name || 'Tribunal');
+      const label = s.date ? `${s.court_name || 'Gericht'} - ${s.date}` : (s.court_name || 'Gericht');
       const url = (s.url || '').startsWith('https://') ? s.url : '#';
       return `<div class="compare-source-row"><span class="source-num">S${i+1}</span> <a href="${Astraea.escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${Astraea.escapeHtml(label)}</a></div>`;
     }).join('');
