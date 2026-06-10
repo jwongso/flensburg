@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NZ Tenancy Help - Free Legal Research</title>
-  <meta name="description" content="Free NZ tenancy law research tool. Search real Tenancy Tribunal decisions to understand your rights as a tenant.">
+  <title>Flensburg - Deutsches Verkehrsrecht</title>
+  <meta name="description" content="Kostenlose Auskunft zu deutschem Verkehrsrecht: Bussgeld, Punkte, Fahrverbot, MPU, Fahrerlaubnis. Auf Basis von StVO, StVG, OWiG, FeV und BKatV.">
   <link rel="stylesheet" href="/static/style.css?v=17">
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 </head>
@@ -25,58 +25,57 @@
         <path d="M22 17 Q25 19 28 17" stroke="#d4a830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         <line x1="12" y1="27" x2="20" y2="27" stroke="#d4a830" stroke-width="1.8" stroke-linecap="round"/>
       </svg>
-      <span class="logo-text">NZ Tenancy Help</span>
+      <span class="logo-text">Flensburg</span>
     </div>
-    <div class="header-tagline">Free &middot; Powered by real Tribunal decisions</div>
+    <div class="header-tagline">Kostenlos &middot; Auf Basis von Bundesrecht</div>
   </div>
 </header>
 
 <main>
   <section class="hero">
-    <h1>Know your tenancy rights</h1>
-    <p class="subtitle">Search 32,000+ real Tenancy Tribunal decisions. Free, always.</p>
+    <h1>Deutsches Verkehrsrecht verstehen</h1>
+    <p class="subtitle">Bussgeld, Punkte, Fahrverbot, MPU, Fahrerlaubnis - kostenlos und ohne Anmeldung.</p>
     <div class="stats">
-      <span>32,000+ decisions</span>
-      <span>2023 - 2026</span>
-      <span>No login required</span>
+      <span>StVO &middot; StVG &middot; OWiG</span>
+      <span>FeV &middot; BKatV &middot; StGB</span>
+      <span>Kein Login erforderlich</span>
     </div>
   </section>
 
   <section class="disclaimer-badge">
-    Not legal advice &middot; AI-generated research &middot; <a href="#" id="show-terms">Read terms</a>
+    Keine Rechtsberatung &middot; KI-generierte Auskunft &middot; <a href="#" id="show-terms">Hinweise lesen</a>
   </section>
 
   <section class="ask-card">
     <form id="ask-form">
-      <label for="question">What is your tenancy question?</label>
+      <label for="question">Ihre Frage zum Verkehrsrecht:</label>
       <textarea
         id="question"
         name="question"
         rows="4"
         maxlength="1200"
-        placeholder="e.g. My landlord is claiming I damaged the carpet, but it was already worn when I moved in. What does the Tribunal usually decide about fair wear and tear?"
+        placeholder="z.B. Ich wurde mit 25 km/h zu schnell innerorts geblitzt. Welches Bussgeld bekomme ich und wie viele Punkte?"
       ></textarea>
       <div class="char-count"><span id="char-count">0</span>/1200</div>
 
       <div class="examples">
-        <span class="examples-label">Try:</span>
-        <button type="button" class="example-btn" data-q="Can my landlord keep my full bond if there is only minor damage to the property?">Bond &amp; damage</button>
-        <button type="button" class="example-btn" data-q="What notice must a landlord give before entering my home under the Residential Tenancies Act?">Entry rights</button>
-        <button type="button" class="example-btn" data-q="My landlord won't fix the heating. What can I do and what does the Tribunal usually order?">Repairs</button>
-        <button type="button" class="example-btn" data-q="What is fair wear and tear and can a landlord charge me for it?">Wear &amp; tear</button>
-        <button type="button" class="example-btn" data-q="Draft a formal letter to my landlord disputing their bond deduction claim for cleaning and damage. They are claiming $500 for carpet replacement and $160 for cleaning, but the carpet was old and worn, I paid for a professional clean, and a second company found no odour.">Draft letter</button>
-        <button type="button" class="example-btn" data-q="Draft a formal email to my property manager requesting urgent repairs to the heating which has been broken for 3 weeks despite my written notice.">Draft email</button>
+        <span class="examples-label">Beispiele:</span>
+        <button type="button" class="example-btn" data-q="Ich wurde mit 25 km/h zu schnell innerorts geblitzt. Welches Bussgeld bekomme ich?">Geschwindigkeit</button>
+        <button type="button" class="example-btn" data-q="Ich habe 7 Punkte in Flensburg. Was passiert als naechstes und wie kann ich Punkte abbauen?">Punkte</button>
+        <button type="button" class="example-btn" data-q="Ich habe einen Bussgeldbescheid erhalten. Wie lege ich Einspruch ein und welche Frist gilt?">Einspruch</button>
+        <button type="button" class="example-btn" data-q="Ich soll zur MPU. Was bedeutet das und wie bereite ich mich vor?">MPU</button>
+        <button type="button" class="example-btn" data-q="Ich hatte 0.8 Promille beim Fahren. Was sind die rechtlichen Folgen?">Alkohol</button>
+        <button type="button" class="example-btn" data-q="Mein Fuehrerschein wurde entzogen. Wie und wann kann ich ihn zurueckbekommen?">Fuehrerscheinentzug</button>
       </div>
 
       <details class="prompt-tips">
-        <summary class="prompt-tips-toggle">Tips for a better answer</summary>
+        <summary class="prompt-tips-toggle">Tipps fuer bessere Antworten</summary>
         <ul class="prompt-tips-list">
-          <li><strong>Describe what happened</strong> &mdash; what the landlord is claiming or doing, and when it started.</li>
-          <li><strong>Include key amounts</strong> &mdash; bond total, cleaning costs, rent owed, or repair quotes.</li>
-          <li><strong>Mention what you have already done</strong> &mdash; paid for a clean, sent a written notice, took photos, etc.</li>
-          <li><strong>Say what you need</strong> &mdash; explain my rights, what are my next steps, or draft a letter / email.</li>
+          <li><strong>Beschreiben Sie den Vorfall</strong> - was genau passiert ist, wann und wo.</li>
+          <li><strong>Nennen Sie konkrete Zahlen</strong> - km/h-Ueberschreitung, Promillewert, Anzahl Punkte.</li>
+          <li><strong>Sagen Sie was Sie brauchen</strong> - Rechte erklaeren, naechste Schritte, oder Einspruch formulieren.</li>
         </ul>
-        <p class="prompt-tips-example"><strong>Example:</strong> &ldquo;My landlord is withholding my $2,000 bond claiming carpet damage. I paid $160 for a professional clean and the carpet was already 8 years old when I moved in. What are my rights and can you draft a letter disputing this?&rdquo;</p>
+        <p class="prompt-tips-example"><strong>Beispiel:</strong> &ldquo;Ich wurde auf der Autobahn mit 160 km/h bei erlaubten 120 km/h geblitzt. Ich habe bereits 3 Punkte. Droht mir ein Fahrverbot?&rdquo;</p>
       </details>
 
       <div id="queue-notice" class="queue-notice"></div>
@@ -94,39 +93,39 @@
       <div class="irac-row">
         <label class="irac-label">
           <input type="checkbox" id="irac-toggle">
-          Format as structured legal memo (IRAC)
+          Als strukturiertes Rechtsgutachten formatieren
         </label>
       </div>
 
-      <button type="submit" id="submit-btn" class="submit-btn">Search Tribunal decisions</button>
+      <button type="submit" id="submit-btn" class="submit-btn">Frage stellen</button>
     </form>
   </section>
 
   <div id="loading-card" class="loading-card" aria-live="polite" aria-busy="true">
     <div class="spinner"></div>
-    <p class="loading-text" id="loading-text">Searching through Tenancy Tribunal decisions...</p>
+    <p class="loading-text" id="loading-text">Gesetze werden durchsucht...</p>
   </div>
 
   <div id="result-card" class="result-card" aria-live="polite">
-    <h2>Research findings</h2>
+    <h2>Auskunft</h2>
     <div class="answer-body" id="answer-body"></div>
-    <div class="ai-warning">AI-generated research - verify with a lawyer before acting.</div>
+    <div class="ai-warning">KI-generierte Auskunft - vor Entscheidungen bitte einen Anwalt konsultieren.</div>
 
     <div class="feedback-row" id="feedback-row">
-      <span class="feedback-label">Was this helpful?</span>
-      <button class="feedback-btn" id="thumb-up" title="Yes, helpful" aria-label="Helpful">
+      <span class="feedback-label">War das hilfreich?</span>
+      <button class="feedback-btn" id="thumb-up" title="Ja, hilfreich" aria-label="Hilfreich">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
           <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
         </svg>
       </button>
-      <button class="feedback-btn" id="thumb-down" title="No, not helpful" aria-label="Not helpful">
+      <button class="feedback-btn" id="thumb-down" title="Nein, nicht hilfreich" aria-label="Nicht hilfreich">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/>
           <path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/>
         </svg>
       </button>
-      <button class="feedback-btn debug-capture-btn" id="debug-capture" title="Save debug context for analysis" aria-label="Save debug context">
+      <button class="feedback-btn debug-capture-btn" id="debug-capture" title="Debug-Kontext speichern" aria-label="Debug-Kontext speichern">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
           <path d="M12 8v4M12 16h.01"/>
@@ -135,47 +134,46 @@
     </div>
 
     <div class="feedback-comment" id="feedback-comment">
-      <textarea id="feedback-text" rows="2" placeholder="What could be better? (optional - helps improve the tool)"></textarea>
-      <button id="feedback-submit" class="btn-secondary">Send feedback</button>
+      <textarea id="feedback-text" rows="2" placeholder="Was koennte besser sein? (optional)"></textarea>
+      <button id="feedback-submit" class="btn-secondary">Feedback senden</button>
     </div>
 
     <div class="feedback-thanks" id="feedback-thanks">
-      Thanks for your feedback - it helps improve this tool.
+      Vielen Dank fuer Ihr Feedback.
     </div>
   </div>
 
   <div id="sources-section" class="sources-section">
-    <h3>Sources cited</h3>
+    <h3>Quellen</h3>
     <div id="sources-list"></div>
   </div>
 
   <div class="ask-another-row" id="ask-another-row">
-    <button type="button" id="ask-another-btn" class="btn-secondary">Ask another question</button>
+    <button type="button" id="ask-another-btn" class="btn-secondary">Weitere Frage stellen</button>
   </div>
 
   <div id="compare-grid" class="compare-grid hidden"></div>
 
   <div id="error-card" class="error-card" aria-live="assertive">
     <p id="error-text"></p>
-    <button type="button" id="retry-btn" class="btn-secondary">Try again</button>
+    <button type="button" id="retry-btn" class="btn-secondary">Erneut versuchen</button>
   </div>
 
   <div class="support-row">
     <a href="https://ko-fi.com/grapplyai" target="_blank" rel="noopener" class="kofi-btn">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg>
-      Support this free tool
+      Dieses kostenlose Angebot unterstuetzen
     </a>
   </div>
 </main>
 
 <footer>
-  <p>Free to use &middot; Powered by real Tenancy Tribunal decisions &middot; Not legal advice</p>
-  <p class="footer-copyright">Tribunal decisions are Crown Copyright (NZ). Reproduced under open access terms via <a href="https://www.nzlii.org/" target="_blank" rel="noopener">NZLII</a>.</p>
-  <p class="footer-copyright">Your conversation is stored for 7 days to enable follow-up questions. Clear your browser storage to remove it.</p>
+  <p>Kostenlos &middot; Auf Basis von Bundesrecht &middot; Keine Rechtsberatung</p>
+  <p class="footer-copyright">Gesetzestexte: <a href="https://www.gesetze-im-internet.de/" target="_blank" rel="noopener">gesetze-im-internet.de</a> (Bundesministerium der Justiz). Reproduziert unter Open-Access-Bedingungen.</p>
+  <p class="footer-copyright">Ihre Unterhaltung wird 7 Tage gespeichert, um Folgefragen zu ermoeglichen. Browser-Speicher loeschen zum Entfernen.</p>
   <div class="footer-links">
-    <a href="https://github.com/jwongso/astraea" target="_blank" rel="noopener">Powered by Astraea</a>
-    &middot; Source data: <a href="https://www.justice.govt.nz/" target="_blank" rel="noopener">Ministry of Justice</a>
-    &middot; Decision links: <a href="https://www.nzlii.org/" target="_blank" rel="noopener">NZLII</a>
+    <a href="https://github.com/jwongso/flensburg" target="_blank" rel="noopener">Powered by Astraea</a>
+    &middot; Gesetze: <a href="https://www.gesetze-im-internet.de/" target="_blank" rel="noopener">BMJ</a>
   </div>
 </footer>
 
@@ -183,19 +181,18 @@
 
 <div id="disclaimer-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-box">
-    <h2 id="modal-title">Before you continue</h2>
+    <h2 id="modal-title">Bitte lesen Sie die Hinweise</h2>
     <div class="modal-body">
-      <p>This tool searches real NZ Tenancy Tribunal decisions published by the <a href="https://www.justice.govt.nz/" target="_blank" rel="noopener">Ministry of Justice</a>. Decision links point to <a href="https://www.nzlii.org/" target="_blank" rel="noopener">NZLII</a>.</p>
-      <p><strong>This tool does not constitute legal advice</strong> under the Lawyers and Conveyancers Act 2006. No solicitor-client relationship is created by using this tool. The developer accepts no liability for decisions made based on information provided.</p>
-      <p>AI-generated answers may be <strong>inaccurate, incomplete, or outdated</strong>. Decisions cited may have been appealed, overturned, or superseded by legislative changes.</p>
-      <p><strong>Do not</strong> use this tool to research individuals for discriminatory purposes, including tenant screening. This may breach the Human Rights Act 1993 and Privacy Act 2020.</p>
-      <p>For advice on your specific situation, contact <a href="https://communitylaw.org.nz" target="_blank" rel="noopener">Community Law</a> (free) or Tenancy Services on <a href="tel:0800836262">0800 836 262</a>.</p>
+      <p>Dieses Tool gibt Auskunft auf Basis von deutschem Bundesrecht (StVO, StVG, OWiG, FeV, BKatV, StGB). Die Gesetzestexte stammen von <a href="https://www.gesetze-im-internet.de/" target="_blank" rel="noopener">gesetze-im-internet.de</a> (Bundesministerium der Justiz).</p>
+      <p><strong>Dieses Tool stellt keine Rechtsberatung dar.</strong> Es wird kein Mandatsverhaeltnis begruendet. Der Entwickler uebernimmt keine Haftung fuer Entscheidungen auf Basis dieser Auskunft.</p>
+      <p>KI-generierte Antworten koennen <strong>ungenau, unvollstaendig oder veraltet</strong> sein. Gesetze aendern sich - pruefen Sie immer den aktuellen Stand.</p>
+      <p>Bei konkreten rechtlichen Problemen wenden Sie sich an einen <strong>Fachanwalt fuer Verkehrsrecht</strong> oder den <a href="https://www.adac.de/" target="_blank" rel="noopener">ADAC</a> (fuer Mitglieder).</p>
     </div>
     <label class="modal-checkbox">
       <input type="checkbox" id="disclaimer-checkbox">
-      I understand this is not legal advice and I will not use this tool for discriminatory purposes.
+      Ich verstehe, dass dies keine Rechtsberatung ist.
     </label>
-    <button id="disclaimer-agree" class="submit-btn" disabled>I agree - continue</button>
+    <button id="disclaimer-agree" class="submit-btn" disabled>Verstanden - weiter</button>
   </div>
 </div>
 

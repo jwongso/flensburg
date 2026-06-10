@@ -2,7 +2,7 @@
 
 // ---- Anonymous session (localStorage UUID, 7-day sliding window) ----
 function _getSessionId() {
-  const key = 'nz_tenancy_session_id';
+  const key = 'flensburg_session_id';
   let id = localStorage.getItem(key);
   if (!id) {
     id = crypto.randomUUID();
@@ -360,10 +360,10 @@ const feedbackSubmit = document.getElementById('feedback-submit');
 const feedbackThanks = document.getElementById('feedback-thanks');
 
 const LOADING_MESSAGES = [
-  'Searching through Tenancy Tribunal decisions...',
-  'Analysing relevant cases...',
-  'Preparing your answer...',
-  'Almost there...',
+  'Gesetze werden durchsucht...',
+  'Relevante Paragraphen werden analysiert...',
+  'Antwort wird vorbereitet...',
+  'Fast fertig...',
 ];
 
 let loadingInterval = null;
@@ -400,9 +400,9 @@ async function pollQueue() {
 // ---- Source rendering (tenancy-specific labels + legislation toggle) ----
 function renderSources(sources, legislation) {
   Astraea.renderSources(sources, legislation, {
-    legislationGroupLabel: 'Relevant legislation',
-    decisionGroupLabel: 'Tribunal decisions',
-    decisionLabel: 'Tenancy Tribunal',
+    legislationGroupLabel: 'Relevante Gesetze',
+    decisionGroupLabel: 'Gerichtsentscheidungen',
+    decisionLabel: 'BGH / OLG',
     showLegToggle: true,
   });
 }
