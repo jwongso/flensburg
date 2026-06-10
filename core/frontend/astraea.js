@@ -243,11 +243,11 @@
 `;
 
   const _CHEAT_CODES = [
-    { cmd: '/search',    desc: 'Find cases without generating an answer',          eg: '/search hardship fixed term house purchase foreseeable' },
-    { cmd: '/case',      desc: 'Focus on Tribunal decisions and outcomes',         eg: '/case Bond deductions for fair wear and tear' },
-    { cmd: '/checklist', desc: 'Step-by-step action list',                         eg: '/checklist My landlord won\'t fix the mould' },
-    { cmd: '/landlord',  desc: 'Answer from the landlord\'s perspective',          eg: '/landlord My tenant hasn\'t paid rent in 3 weeks' },
-    { cmd: '/pitfalls',  desc: 'Common mistakes and risks to avoid',               eg: '/pitfalls I want to end my fixed-term tenancy early' },
+    { cmd: '/search',    desc: 'Gesetze durchsuchen ohne Antwort zu generieren',   eg: '/search Tempolimit Autobahn Ausnahmen Fahrverbot' },
+    { cmd: '/case',      desc: 'Auf BGH/OLG-Entscheidungen konzentrieren',         eg: '/case OLG Einspruch Radarkontrolle Messfehler' },
+    { cmd: '/checklist', desc: 'Schritt-fuer-Schritt Handlungsliste',              eg: '/checklist Bussgeldbescheid erhalten - was tun?' },
+    { cmd: '/einspruch', desc: 'Formulierungshilfe fuer einen Einspruch',          eg: '/einspruch Bussgeldbescheid 25 km/h zu schnell innerorts' },
+    { cmd: '/pitfalls',  desc: 'Typische Fehler und Risiken vermeiden',            eg: '/pitfalls Ich moechte Einspruch gegen meinen Bussgeldbescheid einlegen' },
   ];
 
   function initCheatCodes(inputSelector) {
@@ -350,7 +350,7 @@
     panel.className = 'astraea-ctx-panel hidden';
     panel.innerHTML = '<div class="astraea-ctx-hdr"><h3>Your context</h3><button class="astraea-ctx-x" aria-label="Close">&times;</button></div>'
       + '<p class="astraea-ctx-hint">Tell the AI about your situation once. Stored in your browser only - sent with each question.</p>'
-      + '<textarea id="astraea-ctx-ta" rows="4" maxlength="500" placeholder="e.g. I am a tenant in Auckland. Periodic tenancy since March 2023. Landlord is a property management company."></textarea>'
+      + '<textarea id="astraea-ctx-ta" rows="4" maxlength="500" placeholder="z.B. Ich habe einen Fuehrerschein Klasse B seit 2018. Ich wohne in Bayern. Ich habe 3 Punkte in Flensburg."></textarea>'
       + '<div class="astraea-ctx-char"><span id="astraea-ctx-n">0</span>/500</div>'
       + '<div class="astraea-ctx-actions"><button class="astraea-ctx-clear">Clear</button><button class="astraea-ctx-save">Save</button></div>';
 
